@@ -56,6 +56,8 @@ will perform steps 2-5 (above) for you.
 
 You should shortly see a plot appear, something like the one below: 
 
+![MeDiChI plot](plot.png)
+
 For more extensive MeDiChI package documentation, from within R, type:
 
 ```
