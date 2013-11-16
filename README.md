@@ -64,6 +64,6 @@ Here are some basic installation and usage instructions. For more extensive docu
    help("MeDiChI-data") ## describes the included data
    ```
 
-9. You can also take a look at the MeDiChI (package vignette)[MeDiChI/inst/doc/MeDiChI.pdf].
+9. You can also take a look at the MeDiChI [package vignette](MeDiChI/inst/doc/MeDiChI.pdf).
 
 This is MeDiChI version 0.4.1.
