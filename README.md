@@ -28,9 +28,9 @@ install_github( 'MeDiChI', 'dreiss-isb', subdir='MeDiChI' )
 install.packages( 'MeDiChI', deps=T )
 ```
 
-As of version 0.3.3, MeDiChI has been experimentally parallelized so that it can utilize all cores or processors on a multi-core UNIX computer for deconvolution of a large (genome-wide) data set. This will require the additional installation of the multicore and doMC packages, and should work with no additional required configuration. (However, multicore does not seem to work correctly on Windows systems. This will hopefully be remedied soon.)
+As of version 0.3.3, MeDiChI has been experimentally parallelized so that it can utilize all cores or processors on a multi-core UNIX computer for deconvolution of a large (genome-wide) data set. This will require the additional installation of the [multicore](http://www.rforge.net/multicore/) and [doMC](http://cran.r-project.org/web/packages/doMC) packages, and should work with no additional required configuration. (However, multicore does not seem to work correctly on Windows systems. This will hopefully be remedied soon.)
 
-For more extensive MeDiChI documentation, see section 8, below. You can also take a look at the MeDiChI package vignette.
+For more extensive MeDiChI documentation, see section 8, below. You can also take a look at the MeDiChI [package vignette](MeDiChI/inst/doc/MeDiChI.pdf).
 
 Start R, and enter the following at the R prompt (this will load the low-resolution HaloSpan data, run the MeDiChI deconvolution on a section of it with 10 bootstraps, and visualize the results similar to the top of Figure 3 in the manuscript):
 
@@ -68,6 +68,6 @@ help("MeDiChI") ## library overview -- see the "See Also" section for a list of 
 help("MeDiChI-data") ## describes the included data
 ```
 
-You can also take a look at the MeDiChI package vignette.
+You can also take a look at the MeDiChI (package vignette)[MeDiChI/inst/doc/MeDiChI.pdf].
 
 This is MeDiChI version 0.4.1.
