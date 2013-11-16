@@ -15,9 +15,9 @@ We have developed a MeDiChI R package (including all functions for analysis and 
 
 Here are some basic installation and usage instructions. For more extensive documentation on the package itself, see section 8, below. Please type help(INSTALL) or help(install.packages) in R for information on how to install (local or remote) packages in R.
 
-Download and install R version 2.5.0 or later from CRAN (if not already installed).
+1. Download and install R version 2.5.0 or later from CRAN (if not already installed).
 
-The MeDiChI R package and its dependecies may now more easily be installed directly from github, using the devtools package, by typing, in R:
+2. The MeDiChI R package and its dependecies may now more easily be installed directly from github, using the devtools package, by typing, in R:
 
 ```
 install.packages( 'devtools', dep=T )
@@ -25,28 +25,25 @@ install.packages( c( 'lars', 'quadprog', 'corpcor', 'Matrix' ), dep=T ) ## insta
 library( devtools )
 install_github( 'MeDiChI', 'dreiss-isb', subdir='lars.pos' ) ## install the custom positive-only lars package
 install_github( 'MeDiChI', 'dreiss-isb', subdir='MeDiChI' )
-install.packages( 'MeDiChI', deps=T )
 ```
 
-As of version 0.3.3, MeDiChI has been experimentally parallelized so that it can utilize all cores or processors on a multi-core UNIX computer for deconvolution of a large (genome-wide) data set. This will require the additional installation of the [multicore](http://www.rforge.net/multicore/) and [doMC](http://cran.r-project.org/web/packages/doMC) packages, and should work with no additional required configuration. (However, multicore does not seem to work correctly on Windows systems. This will hopefully be remedied soon.)
+3. As of version 0.3.3, MeDiChI has been experimentally parallelized so that it can utilize all cores or processors on a multi-core UNIX computer for deconvolution of a large (genome-wide) data set. This will require the additional installation of the [multicore](http://www.rforge.net/multicore/) and [doMC](http://cran.r-project.org/web/packages/doMC) packages, and should work with no additional required configuration. (However, multicore does not seem to work correctly on Windows systems. This will hopefully be remedied soon.)
 
-For more extensive MeDiChI documentation, see section 8, below. You can also take a look at the MeDiChI [package vignette](MeDiChI/inst/doc/MeDiChI.pdf).
+4. For more extensive MeDiChI documentation, see section 8, below. You can also take a look at the MeDiChI [package vignette](MeDiChI/inst/doc/MeDiChI.pdf).
 
-Start R, and enter the following at the R prompt (this will load the low-resolution HaloSpan data, run the MeDiChI deconvolution on a section of it with 10 bootstraps, and visualize the results similar to the top of Figure 3 in the manuscript):
+5. Start R, and enter the following at the R prompt (this will load the low-resolution HaloSpan data, run the MeDiChI deconvolution on a section of it with 10 bootstraps, and visualize the results similar to the top of Figure 3 in the manuscript):
 
 ```
 library(MeDiChI) ## loads the MeDiChI library
-
 data("halo.lowres", package="MeDiChI") ## loads the data into memory
 
 fit <- chip.deconv(data.halo.lowres, where="Chr", fit.res=10, center=650000, wind=20000, max.steps=100, n.boot=10, kernel=kernel.halo.lowres, verbose=T, boot.sample.opt="case")
 
-coef(fit)
-
+print(coef(fit))
 plot(fit, plot.genes=T, cex=0.5, cex.lab=0.8, cex.axis=0.8 )
 ```
 
-Alternatively, typing 
+6. Alternatively, typing 
 
 ```
 demo(MeDiChI) 
@@ -54,11 +51,11 @@ demo(MeDiChI)
 
 will perform steps 2-5 (above) for you.
 
-You should shortly see a plot appear, something like the one below: 
+7. You should shortly see a plot appear, something like the one below: 
 
 ![MeDiChI plot](plot.png)
 
-For more extensive MeDiChI package documentation, from within R, type:
+8. For more extensive MeDiChI package documentation, from within R, type:
 
 ```
 library(MeDiChI) ## loads the MeDiChI library
@@ -68,6 +65,6 @@ help("MeDiChI") ## library overview -- see the "See Also" section for a list of 
 help("MeDiChI-data") ## describes the included data
 ```
 
-You can also take a look at the MeDiChI (package vignette)[MeDiChI/inst/doc/MeDiChI.pdf].
+9. You can also take a look at the MeDiChI (package vignette)[MeDiChI/inst/doc/MeDiChI.pdf].
 
 This is MeDiChI version 0.4.1.
