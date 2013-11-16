@@ -44,7 +44,8 @@ fit <- chip.deconv(data.halo.lowres, where="Chr", fit.res=10, center=650000, win
 coef(fit)
 
 plot(fit, plot.genes=T, cex=0.5, cex.lab=0.8, cex.axis=0.8 )
-``
+```
+
 Alternatively, typing 
 
 ```
