@@ -21,10 +21,9 @@ Here are some basic installation and usage instructions. For more extensive docu
 
    ```
    install.packages( 'devtools', dep=T )
-   install.packages( c( 'lars', 'quadprog', 'corpcor', 'Matrix' ), dep=T ) ## install MeDiChI dependencies
    library( devtools )
-   install_github( 'MeDiChI', 'dreiss-isb', subdir='lars.pos' ) ## install the custom positive-only lars package
-   install_github( 'MeDiChI', 'dreiss-isb', subdir='MeDiChI' )
+   install_github( 'MeDiChI', 'dreiss-isb', subdir='lars.pos' ) ## the custom positive-only lars package
+   install_github( 'MeDiChI', 'dreiss-isb', subdir='MeDiChI' ) ## will install all dependencies
    ```
 
 3. As of version 0.3.3, MeDiChI has been experimentally parallelized so that it can utilize all cores or processors on a multi-core UNIX computer for deconvolution of a large (genome-wide) data set. This will require the additional installation of the [multicore](http://www.rforge.net/multicore/) and [doMC](http://cran.r-project.org/web/packages/doMC) packages, and should work with no additional required configuration. (However, multicore does not seem to work correctly on Windows systems. This will hopefully be remedied soon.)
