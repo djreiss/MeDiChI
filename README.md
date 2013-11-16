@@ -33,37 +33,37 @@ Here are some basic installation and usage instructions. For more extensive docu
 
 5. Start R, and enter the following at the R prompt (this will load the low-resolution HaloSpan data, run the MeDiChI deconvolution on a section of it with 10 bootstraps, and visualize the results similar to the top of Figure 3 in the manuscript):
 
-```
-library(MeDiChI) ## loads the MeDiChI library
-data("halo.lowres", package="MeDiChI") ## loads the data into memory
+   ```
+   library(MeDiChI) ## loads the MeDiChI library
+   data("halo.lowres", package="MeDiChI") ## loads the data into memory
 
-fit <- chip.deconv(data.halo.lowres, where="Chr", fit.res=10, center=650000, wind=20000, max.steps=100, n.boot=10, kernel=kernel.halo.lowres, verbose=T, boot.sample.opt="case")
+   fit <- chip.deconv(data.halo.lowres, where="Chr", fit.res=10, center=650000, wind=20000, max.steps=100, n.boot=10, kernel=kernel.halo.lowres, verbose=T, boot.sample.opt="case")
 
-print(coef(fit))
-plot(fit, plot.genes=T, cex=0.5, cex.lab=0.8, cex.axis=0.8 )
-```
+   print(coef(fit))
+   plot(fit, plot.genes=T, cex=0.5, cex.lab=0.8, cex.axis=0.8 )
+   ```
 
 6. Alternatively, typing 
 
-```
-demo(MeDiChI) 
-```
+   ```
+   demo(MeDiChI) 
+   ```
 
-will perform steps 2-5 (above) for you.
+   will perform steps 2-5 (above) for you.
 
 7. You should shortly see a plot appear, something like the one below: 
 
-![MeDiChI plot](plot.png)
+   ![MeDiChI plot](plot.png)
 
 8. For more extensive MeDiChI package documentation, from within R, type:
 
-```
-library(MeDiChI) ## loads the MeDiChI library
+   ```
+   library(MeDiChI) ## loads the MeDiChI library
 
-help("MeDiChI") ## library overview -- see the "See Also" section for a list of all functions for which documentation exists (e.g. "help(chip.deconv)" describes the format required for the input data).
+   help("MeDiChI") ## library overview -- see the "See Also" section for a list of all functions for which documentation exists (e.g. "help(chip.deconv)" describes the format required for the input data).
 
-help("MeDiChI-data") ## describes the included data
-```
+   help("MeDiChI-data") ## describes the included data
+   ```
 
 9. You can also take a look at the MeDiChI (package vignette)[MeDiChI/inst/doc/MeDiChI.pdf].
 
