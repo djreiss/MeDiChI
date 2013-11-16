@@ -1,0 +1,4 @@
+export( "chip.deconv", "plot.chip.deconv", "deconv.entire.genome", "generate.fake.data",
+ "fit.peak.profile", "plot.fit.peak.profile", "print.chip.deconv", "generate.binding.profile",
+ "plot.chip.deconv.entire.genome", "print.chip.deconv.entire.genome",
+ "coef.chip.deconv", "coef.chip.deconv.entire.genome")

@@ -1,0 +1,3 @@
+ lars.pos	Compute the LAR, lasso or forward stagewise coefficient paths        
+ predict.lars.pos	  Predict from a lars.pos model
+   

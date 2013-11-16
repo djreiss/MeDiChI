@@ -1,0 +1,214 @@
+%\VignetteIndexEntry{MeDiChI Overview}
+%\VignetteKeywords{Software, Algorithm}
+%\VignetteDepends{MeDiChI}
+%\VignettePackage{MeDiChI}
+
+\documentclass[12pt]{article}
+
+\usepackage{times}
+\usepackage{hyperref}
+
+\usepackage[authoryear,round]{natbib}
+\usepackage{times}
+%\usepackage{comment}
+
+\textwidth=6.2in
+\textheight=8.5in
+%\parskip=.3cm
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+\newcommand{\scscst}{\scriptscriptstyle}
+\newcommand{\scst}{\scriptstyle}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+
+\newcommand{\tmem}[1]{{\em #1\/}}
+\newcommand{\tmsamp}[1]{\textsf{#1}}
+\newcommand{\tmtextit}[1]{{\itshape{#1}}}
+\newcommand{\cm}{{\tmsamp{MeDiChI}}}
+\newcommand{\halo}{{\tmtextit{H. salinarum NRC-1}}}
+
+\bibliographystyle{plainnat}
+
+
+\title{The MeDiChI ChIP-chip deconvolution package}
+\author{David J Reiss, Institute for Systems Biology}
+
+\begin{document}
+
+\maketitle
+
+ Chromatin immunoprecipitation followed by hybridization to a
+  genomic tiling microarray (ChIP-Chip) is a routinely used protocol
+  for localizing the genomic targets of DNA-binding proteins. The
+  resolution to which binding sites in this assay can be identified is
+  commonly considered to be limited by two factors: (a) the resolution
+  at which the genomic targets are tiled in the microarray, and (b)
+  the large and variable lengths of the immunoprecipitated DNA
+  fragments.
+
+The {\cm} package uses a generative model of binding sites in 
+  ChIP-chip data, and an approach for
+  efficiently and robustly learning that model from diverse data
+  sets. We have evaluated {\cm}'s performance using
+  simulated data, as well as on several diverse ChIP-chip data sets
+  collected on widely different tiling array platforms for two
+  different organisms ({\textit{S. cerevisiae} and \halo). We find
+  that {\cm} accurately predicts binding locations to
+  a resolution greater than that of the probe spacing, even for
+  overlapping peaks, and can increase the effective resolution of
+  tiling array data by a factor of $5\times$ or better. Moreover, the
+  method's performance on simulated data provides insights into
+  effectively optimizing the experimental design for increased binding
+  site localization accuracy and efficacy.
+
+The {\cm} package includes functions for constructing a peak profile,
+using it to deconvolve the ChIP-chip data, and plotting and examining
+the resulting fits. It also includes functions for generating
+simulated data for quality assessment.
+
+We encourage you to read this package's publication, listed at the
+bottom of this document, and to visit the companion website, itemized
+just below.
+
+\begin{center}
+\url{http://baliga.systemsbiology.net/medichi}
+\end{center}
+
+\section{Technical Background and Notes}
+
+The {\cm} package requires a very basic data format, by default a
+two-column matrix listing the central chromosomal coordinate of each
+probe and its intensity ({\tmem{NOTE: intensities should be
+    un-logged}}). Multiple replicates may be included in this single
+data set. For more information, see the online help documentation for
+this package.
+
+\section{Demo 1: Load and deconvolve a small chromosomal segment of ChIP-chip data}
+
+In this first demonstration, we 
+
+\begin{itemize}
+\item Initialize the {\cm} library and load the example low-resolution {\halo} data set
+\item Deconvolve a small part of this data set on the main chromosome, including 100 bootstraps
+\item Plot and examine the resulting fit and bootstrap distribution
+\end{itemize}
+
+<<OpenPDF, eval=TRUE, echo=FALSE>>=
+##postscript( "medichi.eps", width=7.0, height=5.0, paper="special" )
+png( "medichi.png", width=640, height=480 )
+@ 
+
+<<RunChunk, eval=TRUE, echo=TRUE>>=
+library( MeDiChI )
+data( "halo.lowres", package="MeDiChI" )
+fit <- chip.deconv( data.halo.lowres, where="Chr", fit.res=10,
+                    center=650000, wind=20000, max.steps=100, n.boot=10,
+                    kernel=kernel.halo.lowres, verbose=TRUE )
+coef( fit ) ## Print out the coefficients
+plot( fit, plot.genes=TRUE, cex=0.5, cex.lab=0.8, cex.axis=0.8 ) ## Plot it, including ORFs
+@ 
+
+<<closePDF, eval=TRUE, echo=FALSE>>=
+tmp <- dev.off()
+@ 
+
+You should see a plot of the chunk of data and the resulting fit
+appear, similar to this one:
+
+\includegraphics[angle=0]{medichi.png}
+
+\section{Demo 2: Deconvolve an entire data set}
+
+Here we deconvolve the entire data set rather than one small
+chunk. This method effectively deconvolves small chunks of data in a
+scrolling window and merges the results at the end. Depending on the
+size of the data set, this procedure can take a while (this particular
+example will take about 15 minutes). In this demonstration, we
+
+\begin{itemize}
+\item Deconvolve the entire data set, including bootstraps
+\item Plot and examine parts of the resulting fit and bootstrap distribution
+\end{itemize}
+
+<<RunDataSet, eval=FALSE, echo=TRUE>>=
+fits <- deconv.entire.genome( data.halo.lowres, max.steps=100, fit.res=30, n.boot=10,
+                             boot.sample="residual", kernel=kernel.halo.lowres,
+                             verbose=FALSE )
+coef( fits$fits.fin$Chr )
+plot( fits$fits.fin$Chr, center=650000, wind=20000, plot.genes=T )
+@
+
+You should see a plot appear, similar to the one above.
+The print-out of the coefficients will include p-values for
+each detected peak (based upon bootstrap statistics across the entire
+data set).
+
+\section{Demo 3: Learn the peak profile from data}
+
+In the previous twoexamples, we used a pre-computed ChIP-chip peak
+profile (the same one that was used in the manuscript [1]. In this
+demo, we will show how this peak profile is computed from the data
+set. This method starts with a guess for good starting parameters,
+generates a binding profile using those parameters, and detects
+binding sites across the data set as in the previous example. It then
+identifies the 20 brightest, most isolated peaks, and adjusts the peak
+profile parameters to better reflect those peaks. This process is
+repeated several times. It can be sped up by adjusting the parameters
+of the following function to make its repeated calls to
+{\tt{deconv.entire.genome()}} execute faster.  In this demonstration, we
+
+\begin{itemize}
+\item Fit a peak profile (kernel) to the low-resolution {\halo} data set
+\item Plot the resulting fit and learn how to use the output for a run
+  of {\tt{chip.deconv()}} or {\tt{deconv.entire.genome()}}
+\end{itemize}
+
+<<GetPeakProfile, eval=FALSE, echo=TRUE>>=
+peak.params <- fit.peak.profile( data.halo.lowres, tile.size=500, quant.cutoff="q0.98",
+                            chrom="Chr", fit.res=30, max.steps=100, plot=T, name="Halo-lowres" )
+@ 
+
+The resulting structure can be plotted, which will display seven of
+the brightest peaks contributing to the fit, the best-fit DNA fragment
+length distribution, and the final peak profile, including all data
+data points surrounding the 20 brightest, isolated peaks (shifted and
+normalized based on their best-fit positions and intensities).
+
+<<PlotPeakProfile, eval=FALSE, echo=TRUE>>=
+plot( peak.params )
+@ 
+
+This results in something like this for the above example:
+
+\includegraphics[angle=0]{peakprofile.png}
+
+<<GetKernel, eval=FALSE, echo=TRUE>>=
+peak.params$kernel
+@ 
+
+may be used as a kernel for more accurate deconvolution
+{\tt{chip.deconv()}} or {\tt{deconv.entire.genome()}} as in the
+previous two examples.
+
+\section{For More Information}
+
+For more information, please visit:
+
+\url{http://baliga.systemsbiology.net/medichi}
+
+\section{References}
+
+\begin{itemize}
+
+\item Reiss, DJ and Facciotti, MT and Baliga, NS. (2007). "Model-based
+     deconvolution of genome-wide DNA binding", \emph{Bioinformatics}. doi:
+     10.1093/bioinformatics/btm592.
+\end{itemize}
+
+\end{document}
