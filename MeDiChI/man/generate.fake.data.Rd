@@ -51,7 +51,7 @@ noise.func = function(data)noise*(1+sqrt(data)), ...)
 \author{
   David J Reiss, Institute for Systems Biology
   
-  Maintainer: <dreiss@systemsbiology.org>
+  Maintainer: <dreiss.isb@gmail.com.org>
 }
 \seealso{chip.deconv, generate.binding.profile}
 \examples{

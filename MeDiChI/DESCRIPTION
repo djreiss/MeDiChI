@@ -4,7 +4,7 @@ Title: MeDiChI ChIP-chip deconvolution library
 Version: 0.4.1
 Date: Jul 26 2011
 Author: David J Reiss
-Maintainer: David J Reiss <dreiss@systemsbiology.org>
+Maintainer: David J Reiss <dreiss.isb@gmail.com.org>
 Description: Model-based deconvolution of genome-wide binding (ChIP-chip) data
 License: GPL-2
 Depends: R (>= 2.10), lars (>= 0.9.5), quadprog (>= 1.4.10), corpcor

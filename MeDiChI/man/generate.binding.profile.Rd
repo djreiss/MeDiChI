@@ -56,7 +56,7 @@ plot = F, verbose = F, no.multicore=T, ...)
 \author{
   David J Reiss, Institute for Systems Biology
   
-  Maintainer: <dreiss@systemsbiology.org>
+  Maintainer: <dreiss.isb@gmail.com.org>
 }
 \seealso{
   chip.deconv, deconv.entire.genome, fit.peak.profile, generate.fake.data,

@@ -104,7 +104,7 @@ coef.chip.deconv.entire.genome(object, ...)
 \author{
   David J Reiss, Institute for Systems Biology
   
-  Maintainer: <dreiss@systemsbiology.org>
+  Maintainer: <dreiss.isb@gmail.com.org>
 }
 \seealso{
   chip.deconv, plot.chip.deconv, fit.peak.profile, generate.fake.data,

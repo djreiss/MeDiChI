@@ -24,7 +24,7 @@ demo(MeDiChI)\cr
 \author{
   David J Reiss, Institute for Systems Biology
   
-  Maintainer: <dreiss@systemsbiology.org>
+  Maintainer: <dreiss.isb@gmail.com.org>
 }
 \references{
   (1). Reiss, DJ and Facciotti, MT and Baliga, NS. (2007). "Model-based

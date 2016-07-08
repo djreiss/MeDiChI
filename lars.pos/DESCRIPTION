@@ -3,8 +3,8 @@ Version:	0.9-6
 Date:		2004-09-16
 Title:		Least Angle Regression, Lasso and Forward Stagewise, Positive-only
 Author:		Trevor Hastie <hastie@stanford.edu> and Brad Efron 
-		<brad@stat.stanford.edu> and David J Reiss <dreiss@systemsbiology.org>
-Maintainer:	David J Reiss <dreiss@systemsbiology.org>
+		<brad@stat.stanford.edu> and David J Reiss <dreiss.isb@gmail.com.org>
+Maintainer:	David J Reiss <dreiss.isb@gmail.com.org>
 Depends:	R, lars (>= 0.9-6)
 Description:	Modified version of the LARS library to include option for positive-
 		only coefficients, as documented in the paper below.

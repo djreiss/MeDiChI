@@ -92,7 +92,7 @@ plot.fit.peak.profile(x, n.peak.plot = 7, plot.spline = F, ...)
 \author{
   David J Reiss, Institute for Systems Biology
   
-  Maintainer: <dreiss@systemsbiology.org>
+  Maintainer: <dreiss.isb@gmail.com.org>
 }
 \seealso{
   chip.deconv, deconv.entire.genome, generate.fake.data,
